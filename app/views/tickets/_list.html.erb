@@ -1,0 +1,48 @@
+<div id="tickets">
+  <% if tickets.any? %>
+    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div class="divide-y divide-gray-100">
+        <% tickets.each do |ticket| %>
+          <%= link_to ticket,
+                      class: "grid grid-cols-[minmax(0,1fr)_180px_100px_100px] items-center gap-4 px-5 py-4 hover:bg-gray-50" do %>
+
+            <div class="min-w-0">
+              <p class="truncate text-sm font-medium text-gray-900">
+                <%= ticket.subject %>
+              </p>
+
+              <p class="mt-1 truncate text-xs text-gray-500">
+                <%= ticket.requester&.display_name || "No requester" %>
+              </p>
+            </div>
+
+            <div class="truncate text-sm text-gray-500">
+              <%= ticket.assignee&.email_address || "Unassigned" %>
+            </div>
+
+            <div>
+              <span class="rounded-full px-2.5 py-1 text-xs font-medium <%= ticket_status_classes(ticket) %>">
+                <%= ticket.status.humanize %>
+              </span>
+            </div>
+
+            <div class="text-sm text-gray-500">
+              <%= ticket.priority.humanize %>
+            </div>
+
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="rounded-xl border border-gray-200 bg-white px-6 py-16 text-center">
+      <p class="text-sm font-medium text-gray-900">
+        No tickets found
+      </p>
+
+      <p class="mt-1 text-sm text-gray-500">
+        Try changing your filters.
+      </p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,78 @@
+<% content_for :title, "#{@contact.display_name} · OpenDesk" %>
+
+<div class="px-8 py-8">
+  <%= link_to "← Contacts",
+              contacts_path,
+              class: "text-sm text-gray-500 hover:text-gray-900" %>
+
+  <div class="mt-6 flex items-start justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight text-gray-900">
+        <%= @contact.display_name %>
+      </h1>
+
+      <p class="mt-1 text-sm text-gray-500">
+        <%= @contact.email %>
+      </p>
+    </div>
+
+    <%= link_to "New ticket",
+                new_ticket_path(contact_id: @contact.id),
+                class: "rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700" %>
+  </div>
+
+  <div class="mt-10">
+    <div class="flex items-center justify-between">
+      <h2 class="text-sm font-semibold text-gray-900">
+        Tickets
+      </h2>
+
+      <span class="text-sm text-gray-500">
+        <%= pluralize(@tickets.size, "ticket") %>
+      </span>
+    </div>
+
+    <div class="mt-4 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <% if @tickets.any? %>
+
+        <div class="divide-y divide-gray-100">
+          <% @tickets.each do |ticket| %>
+            <%= link_to ticket,
+                        class: "flex items-center justify-between gap-6 px-5 py-4 hover:bg-gray-50" do %>
+
+              <div class="min-w-0">
+                <p class="truncate text-sm font-medium text-gray-900">
+                  <%= ticket.subject %>
+                </p>
+
+                <p class="mt-1 text-xs text-gray-500">
+                  <%= ticket.created_at.strftime("%b %d, %Y") %>
+                </p>
+              </div>
+
+              <div class="flex shrink-0 items-center gap-3">
+                <span class="rounded-full px-2.5 py-1 text-xs font-medium <%= ticket_status_classes(ticket) %>">
+                  <%= ticket.status.humanize %>
+                </span>
+
+                <span class="text-sm text-gray-500">
+                  <%= ticket.priority.humanize %>
+                </span>
+              </div>
+
+            <% end %>
+          <% end %>
+        </div>
+
+      <% else %>
+
+        <div class="px-6 py-12 text-center">
+          <p class="text-sm text-gray-500">
+            This contact doesn't have any tickets.
+          </p>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

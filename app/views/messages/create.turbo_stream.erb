@@ -1,0 +1,11 @@
+<%= turbo_stream.append "messages" do %>
+    <%= render @message %>
+<% end %>
+
+<%= turbo_stream.replace "new_message" do %>
+    <div id="new_message" class="pt-4">
+        <%= render "messages/form",
+                    ticket: @ticket,
+                    message: @ticket.messages.build %>
+    </div>
+<% end %>

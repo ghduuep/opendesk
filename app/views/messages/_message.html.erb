@@ -1,0 +1,25 @@
+<div id="<%= dom_id(message) %>"class="<%= message.note? ? "border-yellow-200 bg-yellow-50" : "border-gray-200 bg-white rounded-xl border p-5" %>
+    <div class="flex items-center justify-between gap-4">
+        <div>
+            <p class="text-sm font-medium text-gray-900">
+                <% if message.user %>
+                    <%= message.user.email_address %>
+                <% else %>
+                    <%= message.ticket.requester&.name || "Customer" %>
+                <% end %>
+            </p>
+
+            <% if message.note? %>
+                <span class="mt-1 inline-block text-xs font-medium text-yellow-700">
+                    Internal note
+                </span>
+            <% end %>
+        </div>
+
+        <time class="text-xs text-gray-400">
+            <%= message.created_at.strftime("%b %d, %H:%M") %>
+        </time>
+    </div>
+
+    <div class="mt-4 whitespace-pre-wrap text-sm leading-6 text-gray-700"><%= message.body %></div>
+</div>

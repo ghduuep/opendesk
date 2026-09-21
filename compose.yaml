@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: opendesk
+      POSTGRES_PASSWORD: opendesk
+      POSTGRES_DB: opendesk_development
+
+    ports:
+      - "5432:5432"

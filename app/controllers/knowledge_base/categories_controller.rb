@@ -1,5 +1,5 @@
 class KnowledgeBase::CategoriesController < ApplicationController
-  before_action :set_category, only: :show
+  before_action :set_category, only: %i[show destroy]
   def index
     @categories = Current.account.knowledge_base_categories.order(:position, :name)
   end
@@ -16,10 +16,16 @@ class KnowledgeBase::CategoriesController < ApplicationController
     @category = Current.account.knowledge_base_categories.new(category_params)
 
     if @category.save
-      redirect_to knowledge_base_root_path, notice: "Category created succesfully"
+      redirect_to knowledge_base_root_path, notice: "Category created successfully"
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @category.destroy!
+
+    redirect_to knowledge_base_root_path, notice: "Category deleted successfully"
   end
 
   private

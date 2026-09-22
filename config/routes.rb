@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :knowledge_base, path: "knowledge-base" do
     root "categories#index"
 
-    resources :categories, only: %i[index new create show] do
+    resources :categories, only: %i[index new create show destroy] do
       resources :articles, only: %i[new create]
     end
 

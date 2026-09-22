@@ -1,5 +1,6 @@
 class KnowledgeBase::Article < ApplicationRecord
   belongs_to :category, class_name: "KnowledgeBase::Category", inverse_of: :articles
+  has_rich_text :body
 
   enum :status, { draft: 0, published: 1 }
 

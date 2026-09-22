@@ -3,6 +3,7 @@ class Ticket < ApplicationRecord
   belongs_to :requester, class_name: "Contact", optional: true
   belongs_to :assignee, class_name: "User", optional: true
   has_many :messages, dependent: :destroy
+  has_rich_text :description
 
   enum :status, { open: 0, pending: 1, resolved: 2, closed: 3 }
   enum :priority, { low: 0, normal: 1, high: 2, urgent: 3 }

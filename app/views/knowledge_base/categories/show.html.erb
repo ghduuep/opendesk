@@ -1,0 +1,60 @@
+<% content_for :title, "#{@category.name} · Knowledge Base · OpenDesk" %>
+
+<div class="mx-auto max-w-5xl px-8 py-10">
+  <%= link_to "← Knowledge Base",
+    knowledge_base_root_path,
+    class: "text-sm text-gray-500 hover:text-gray-900" %>
+
+  <div class="mt-6 flex items-start justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900">
+        <%= @category.name %>
+      </h1>
+
+      <% if @category.description.present? %>
+        <p class="mt-1 text-sm text-gray-500">
+          <%= @category.description %>
+        </p>
+      <% end %>
+    </div>
+
+    <%= link_to "New article", new_knowledge_base_category_article_path(@category), class: "rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800" %>
+  </div>
+
+  <div class="mt-8">
+    <% if @articles.any? %>
+      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div class="divide-y divide-gray-100">
+          <% @articles.each do |article| %>
+            <%= link_to knowledge_base_article_path(article), class: "flex items-center justify-between px-5 py-4" do %>
+              <div>
+                <h2 class="text-sm font-medium text-gray-900">
+                  <%= article.title %>
+                </h2>
+
+                <p class="mt-1 text-xs text-gray-500">
+                  <%= article.status.humanize %>
+                </p>
+              </div>
+
+              <span class="text-gray-400">
+                →
+              </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="rounded-xl border border-dashed border-gray-300 px-6 py-12 text-center">
+        <h2 class="text-sm font-medium text-gray-900">
+          No articles yet
+        </h2>
+
+        <p class="mt-1 text-sm text-gray-500">
+          Create your first article in this category.
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

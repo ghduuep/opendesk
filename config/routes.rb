@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :knowledge_base, path: "knowledge-base" do
+    root "categories#index"
+
+    resources :categories, only: %i[index new create show] do
+      resources :articles, only: %i[new create]
+    end
+
+    resources :articles, only: %i[show edit update]
+  end
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

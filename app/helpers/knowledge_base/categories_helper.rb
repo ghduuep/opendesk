@@ -1,0 +1,2 @@
+module KnowledgeBase::CategoriesHelper
+end

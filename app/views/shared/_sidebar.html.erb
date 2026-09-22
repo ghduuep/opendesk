@@ -6,17 +6,17 @@
     </div>
 
     <nav class="flex-1 space-y-1 p-4">
-        <%= link_to tickets_path, class: "flex items-center rounded-lg bg-gray-100 px-3 py-2 text-sm font-medium text-gray-900" do %>
+        <%= link_to tickets_path, class: "flex items-center rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-900" do %>
         Tickets
         <% end %>
 
-        <%= link_to contacts_path, class: "flex items-center rounded-lg px-3 pt-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-900" do %>
+        <%= link_to contacts_path, class: "flex items-center rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray-900" do %>
             Contacts
         <% end %>
 
-        <span class="flex cursor-not-allowed items-center rounded-lg px-3 py-2 text-sm text-gray-400">
+        <%= link_to knowledge_base_root_path, class: "flex items-center rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-gray 900" do %>
             Knowledge base
-        </span>
+        <% end %>
     </nav>
 
     <div class="border-t border-gray-200 p-4">

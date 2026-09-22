@@ -1,0 +1,54 @@
+<% content_for :title, "New category · OpenDesk" %>
+
+<div class="mx-auto max-w-2xl px-8 py-10">
+  <%= link_to "← Knowledge Base",
+    knowledge_base_root_path,
+    class: "text-sm text-gray-500 hover:text-gray-900" %>
+
+  <div class="mt-6">
+    <h1 class="text-2xl font-semibold text-gray-900">
+      New category
+    </h1>
+
+    <p class="mt-1 text-sm text-gray-500">
+      Create a category to organize your help articles.
+    </p>
+  </div>
+
+  <%= form_with model: @category, url: knowledge_base_categories_path,
+    class: "mt-8 space-y-6" do |form| %>
+
+    <% if @category.errors.any? %>
+      <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700">
+        <%= @category.errors.full_messages.to_sentence %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :name,
+        class: "block text-sm font-medium text-gray-700" %>
+
+      <%= form.text_field :name,
+        autofocus: true,
+        class: "mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" %>
+    </div>
+
+    <div>
+      <%= form.label :description,
+        class: "block text-sm font-medium text-gray-700" %>
+
+      <%= form.text_area :description,
+        rows: 4,
+        class: "mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm" %>
+    </div>
+
+    <div class="flex items-center justify-end gap-3">
+      <%= link_to "Cancel",
+        knowledge_base_root_path,
+        class: "text-sm text-gray-600 hover:text-gray-900" %>
+
+      <%= form.submit "Create category",
+        class: "rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800" %>
+    </div>
+  <% end %>
+</div>

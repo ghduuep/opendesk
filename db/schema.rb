@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_19_133224) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_21_224609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,6 +28,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_19_133224) do
     t.datetime "updated_at", null: false
     t.index ["account_id", "email"], name: "index_contacts_on_account_id_and_email", unique: true
     t.index ["account_id"], name: "index_contacts_on_account_id"
+  end
+
+  create_table "knowledge_base_articles", force: :cascade do |t|
+    t.text "body"
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "published_at"
+    t.string "slug", null: false
+    t.integer "status", default: 0, null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_knowledge_base_articles_on_category_id"
+    t.index ["slug"], name: "index_knowledge_base_articles_on_slug", unique: true
+  end
+
+  create_table "knowledge_base_categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.string "slug", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_knowledge_base_categories_on_slug", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
@@ -77,6 +100,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_19_133224) do
   end
 
   add_foreign_key "contacts", "accounts"
+  add_foreign_key "knowledge_base_articles", "knowledge_base_categories", column: "category_id"
   add_foreign_key "messages", "tickets"
   add_foreign_key "messages", "users"
   add_foreign_key "sessions", "users"

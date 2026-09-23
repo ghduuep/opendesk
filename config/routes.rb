@@ -26,6 +26,6 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
-  resources :contacts, only: %i[index show]
+  resources :contacts, only: %i[index show destroy]
   root "tickets#index"
 end

@@ -1,4 +1,5 @@
 class Agent::BaseController < ApplicationController
+  layout "agent"
   before_action :require_agent_access!
 
   private

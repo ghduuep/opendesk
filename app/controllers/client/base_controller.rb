@@ -1,4 +1,5 @@
 class Client::BaseController < ApplicationController
+  layout "client"
   before_action :require_customer_access!
 
   private

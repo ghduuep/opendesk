@@ -11,6 +11,22 @@
     </p>
   </div>
 
+  <%= form_with url: client_knowledge_base_search_path,
+    method: :get,
+    class: "mt-8" do |form| %>
+
+    <div class="flex gap-2">
+      <%= form.search_field :q,
+        value: params[:q],
+        placeholder: "Search the knowledge base...",
+        class: "block w-full rounded-lg border border-gray-300 px-4 py-3 text-sm",
+        required: true %>
+
+      <%= form.submit "Search",
+        class: "rounded-lg bg-gray-900 px-5 py-3 text-sm font-medium text-white hover:bg-gray-700" %>
+    </div>
+  <% end %>
+
   <div class="mt-8">
     <% if @categories.any? %>
       <div class="grid gap-4 sm:grid-cols-2">

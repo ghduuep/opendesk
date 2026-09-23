@@ -12,11 +12,11 @@ Rails.application.routes.draw do
     namespace :knowledge_base, path: "knowledge-base" do
       root "categories#index"
 
-      resources :categories, only: %i[index new create show destroy] do
+      resources :categories, only: %i[index new create show destroy], param: :slug do
         resources :articles, only: %i[new create]
       end
 
-      resources :articles, only: %i[show edit update]
+      resources :articles, only: %i[show edit update], param: :slug
     end
   end
 
@@ -30,8 +30,10 @@ Rails.application.routes.draw do
     namespace :knowledge_base, path: "knowledge-base" do
       root "categories#index"
 
-      resources :categories, only: %i[index show]
-      resources :articles, only: :show
+      get "search", to: "articles#search"
+
+      resources :categories, only: %i[index show], param: :slug
+      resources :articles, only: :show, param: :slug
     end
   end
 

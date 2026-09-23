@@ -12,6 +12,6 @@ class Client::KnowledgeBase::CategoriesController < Client::BaseController
   private
 
   def set_category
-    @category = Current.account.knowledge_base_categories.find(params[:id])
+    @category = Current.account.knowledge_base_categories.find_by!(slug: params[:slug])
   end
 end

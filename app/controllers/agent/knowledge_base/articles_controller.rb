@@ -34,11 +34,11 @@ class Agent::KnowledgeBase::ArticlesController < Agent::BaseController
   private
 
   def set_category
-    @category = Current.account.knowledge_base_categories.find(params[:category_id])
+    @category = Current.account.knowledge_base_categories.find_by!(slug: params[:category_slug])
   end
 
   def set_article
-    @article = Current.account.knowledge_base_articles.find(params[:id])
+    @article = KnowledgeBase::Article.joins(:category).where(knowledge_base_categories: { account_id: Current.account.id }).find_by!(slug: params[:slug])
   end
 
   def article_params

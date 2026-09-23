@@ -20,6 +20,21 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :client do
+    root "dashboard#index"
+
+    resources :tickets, only: %i[index show new create] do
+      resources :messages, only: :create
+    end
+
+    namespace :knowledge_base, path: "knowledge-base" do
+      root "categories#index"
+
+      resources :categories, only: %i[index show]
+      resources :articles, only: :show
+    end
+  end
+
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

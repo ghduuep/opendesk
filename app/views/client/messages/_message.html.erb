@@ -1,0 +1,21 @@
+<div id="<%= dom_id(message) %>"
+     class="rounded-xl border border-gray-200 bg-white p-5">
+
+  <div class="flex items-center justify-between gap-4">
+    <p class="text-sm font-medium text-gray-900">
+      <% if message.user&.can_access_agent_workspace? %>
+        Support
+      <% else %>
+        You
+      <% end %>
+    </p>
+
+    <time class="text-xs text-gray-400">
+      <%= time_ago_in_words(message.created_at) %> ago
+    </time>
+  </div>
+
+  <div class="prose prose-sm mt-3 max-w-none">
+    <%= message.body %>
+  </div>
+</div>

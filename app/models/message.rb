@@ -8,4 +8,5 @@ class Message < ApplicationRecord
   validates :body, presence: true
 
   scope :chronological, -> { order(created_at: :asc) }
+  scope :visible_to_customer, -> { where(kind: :reply) }
 end

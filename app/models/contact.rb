@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
   belongs_to :account
+  belongs_to :user
 
   has_many :tickets, foreign_key: :requester_id, dependent: :restrict_with_error
 

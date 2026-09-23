@@ -9,15 +9,29 @@
 #   end
 account = Account.find_or_create_by!(name: "OpenDesk Demo")
 
-user = User.find_or_initialize_by(
+admin = User.find_or_initialize_by(
   email_address: "admin@opendesk.local"
 )
 
-user.account = account
-user.role = :admin
-user.password = "password123"
-user.password_confirmation = "password123"
-user.save!
+admin.account = account
+admin.role = :admin
+admin.password = "password123"
+admin.password_confirmation = "password123"
+admin.save!
 
 puts "Created #{account.name}"
-puts "Login: #{user.email_address}"
+puts "Login: #{admin.email_address}"
+
+
+customer = User.find_or_initialize_by(
+  email_address: "customer@opendesk.local"
+)
+
+customer.account = account
+customer.role = :customer
+customer.password = "password123"
+customer.password_confirmation = "password123"
+customer.save!
+
+puts "Created #{account.name}"
+puts "Login: #{customer.email_address}"

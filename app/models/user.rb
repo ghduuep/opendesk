@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  after_create_commit :create_customer_contact, if: :customer?
+
   def can_access_agent_workspace?
     agent? || admin?
   end
@@ -20,5 +22,14 @@ class User < ApplicationRecord
 
   def can_access_customer_portal?
     customer?
+  end
+
+  private
+
+  def create_customer_contact
+    create_contact!(
+      account: account,
+      email: email_address
+    )
   end
 end

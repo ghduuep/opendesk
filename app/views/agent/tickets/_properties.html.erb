@@ -4,7 +4,7 @@
       Properties
     </h2>
 
-    <%= form_with model: ticket, class: "mt-6 space-y-6" do |form| %>
+    <%= form_with model: [:agent, ticket], class: "mt-6 space-y-6" do |form| %>
       <div>
         <%= form.label :status,
           class: "block text-xs font-medium uppercase tracking-wide text-gray-500" %>

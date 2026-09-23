@@ -1,4 +1,4 @@
-class KnowledgeBase::ArticlesController < ApplicationController
+class Agent::KnowledgeBase::ArticlesController < Agent::BaseController
   before_action :set_category, only: %i[new create]
   before_action :set_article, only: %i[show edit update]
 
@@ -13,7 +13,7 @@ class KnowledgeBase::ArticlesController < ApplicationController
     @article = @category.articles.new(article_params)
 
     if @article.save
-      redirect_to knowledge_base_category_path(@category), notice: "Article created succesfully"
+      redirect_to agent_knowledge_base_category_path(@category), notice: "Article created succesfully"
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class KnowledgeBase::ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to knowledge_base_article_path(@article),
+      redirect_to agent_knowledge_base_article_path(@article),
       notice: "Article update successfully."
     else
       render :edit, status: :unprocessable_entity

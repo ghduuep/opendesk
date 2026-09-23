@@ -14,6 +14,7 @@ user = User.find_or_initialize_by(
 )
 
 user.account = account
+user.role = :admin
 user.password = "password123"
 user.password_confirmation = "password123"
 user.save!

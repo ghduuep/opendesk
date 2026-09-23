@@ -1,13 +1,25 @@
 Rails.application.routes.draw do
-  namespace :knowledge_base, path: "knowledge-base" do
-    root "categories#index"
+  get "home/index"
+  namespace :agent do
+    root "dashboard#index"
 
-    resources :categories, only: %i[index new create show destroy] do
-      resources :articles, only: %i[new create]
+    resources :tickets do
+      resources :messages, only: :create
     end
 
-    resources :articles, only: %i[show edit update]
+    resources :contacts, only: %i[index show destroy]
+
+    namespace :knowledge_base, path: "knowledge-base" do
+      root "categories#index"
+
+      resources :categories, only: %i[index new create show destroy] do
+        resources :articles, only: %i[new create]
+      end
+
+      resources :articles, only: %i[show edit update]
+    end
   end
+
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -21,11 +33,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
-  resources :tickets do
-    resources :messages, only: :create
-  end
-
-  resources :contacts, only: %i[index show destroy]
-  root "tickets#index"
+  root "home#index"
 end

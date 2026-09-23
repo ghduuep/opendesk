@@ -3,7 +3,7 @@
     <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <div class="divide-y divide-gray-100">
         <% tickets.each do |ticket| %>
-          <%= link_to ticket,
+          <%= link_to agent_ticket_path(ticket),
                       class: "grid grid-cols-[minmax(0,1fr)_180px_100px_100px] items-center gap-4 px-5 py-4 hover:bg-gray-50" do %>
 
             <div class="min-w-0">

@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class Agent::MessagesController < Agent::BaseController
   def create
     @ticket = Current.account.tickets.find(params[:ticket_id])
 
@@ -8,14 +8,14 @@ class MessagesController < ApplicationController
     if @message.save
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to @ticket, notice: "Message added. " }
+        format.html { redirect_to agent_ticket_path(@ticket), notice: "Message added. " }
       end
     else
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(
             "new_message",
-            partial: "messages/form",
+            partial: "agent/messages/form",
             locals: {
               ticket: @ticket,
               message: @message
@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
 
         format.html do
           @messages = @ticket.messages.includes(:user).chronological
-          render "tickets/show", status: :unprocessable_entity
+          render "agent/tickets/show", status: :unprocessable_entity
         end
       end
     end

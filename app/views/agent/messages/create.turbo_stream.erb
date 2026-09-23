@@ -4,7 +4,7 @@
 
 <%= turbo_stream.replace "new_message" do %>
     <div id="new_message" class="pt-4">
-        <%= render "messages/form",
+        <%= render "agent/messages/form",
                     ticket: @ticket,
                     message: @ticket.messages.build %>
     </div>

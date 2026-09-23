@@ -1,5 +1,5 @@
 <div class="rounded-xl border border-gray-200 bg-white shadow-sm">
-    <%= form_with model: [ticket, message] do |form| %>
+    <%= form_with model: [:agent, ticket, message] do |form| %>
 
     <% if message.errors.any? %>
         <div class="border-b border-red-100 bg-red-50 px-4 py-3">

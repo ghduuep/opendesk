@@ -1,7 +1,7 @@
 <%= form_with model: article,
   url: article.persisted? ?
-    knowledge_base_article_path(article) :
-    knowledge_base_category_articles_path(category),
+    agent_knowledge_base_article_path(article) :
+    agent_knowledge_base_category_articles_path(category),
   class: "space-y-6" do |form| %>
 
   <% if article.errors.any? %>
@@ -41,8 +41,8 @@
   <div class="flex items-center justify-end gap-3">
     <%= link_to "Cancel",
       article.persisted? ?
-        knowledge_base_article_path(article) :
-        knowledge_base_category_path(category),
+        agent_knowledge_base_article_path(article) :
+        agent_knowledge_base_category_path(category),
       class: "text-sm text-gray-600 hover:text-gray-900" %>
 
     <%= form.submit article.persisted? ? "Save changes" : "Create article",

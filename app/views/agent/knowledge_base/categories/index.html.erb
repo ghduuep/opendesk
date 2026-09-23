@@ -13,7 +13,7 @@
     </div>
 
     <%= link_to "New category",
-      new_knowledge_base_category_path,
+      new_agent_knowledge_base_category_path,
       class: "rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800" %>
   </div>
 
@@ -22,7 +22,7 @@
       <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
         <div class="divide-y divide-gray-100">
           <% @categories.each do |category| %>
-            <%= link_to knowledge_base_category_path(category), class: "flex items-center justify-between px-5 py-4 transition hover:bg-gray-50" do %>
+            <%= link_to agent_knowledge_base_category_path(category), class: "flex items-center justify-between px-5 py-4 transition hover:bg-gray-50" do %>
 
               <div>
                 <h2 class="text-sm font-medium text-gray-900">

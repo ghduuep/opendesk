@@ -1,4 +1,4 @@
-class TicketsController < ApplicationController
+class Agent::TicketsController < Agent::BaseController
   before_action :set_ticket, only: %i[show edit update destroy]
 
   def index
@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
       .search(params[:q])
       .with_status(params[:status])
       .with_priority(params[:priority])
-      .assigned_to(params[:assigned_id])
+      .assigned_to(params[:assignee_id])
       .recent
   end
 
@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
     )
 
     if @ticket_form.save
-      redirect_to @ticket_form.ticket, notice: "Ticket created successfully."
+      redirect_to agent_ticket_path(@ticket_form.ticket), notice: "Ticket created successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,7 +47,7 @@ class TicketsController < ApplicationController
 
     if @ticket.save
       respond_to do |format|
-        format.html { redirect_to @ticket, notice: "Ticket updated. " }
+        format.html { redirect_to agent_ticket_path(@ticket), notice: "Ticket updated. " }
         format.turbo_stream
       end
     else
@@ -61,7 +61,7 @@ class TicketsController < ApplicationController
   def destroy
     @ticket.destroy!
 
-    redirect_to tickets_path, notice: "Ticket deleted."
+    redirect_to agent_tickets_path, notice: "Ticket deleted."
   end
 
   private

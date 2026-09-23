@@ -2,7 +2,7 @@
 
 <div class="mx-auto max-w-2xl px-8 py-10">
   <%= link_to "← Knowledge Base",
-    knowledge_base_root_path,
+    agent_knowledge_base_root_path,
     class: "text-sm text-gray-500 hover:text-gray-900" %>
 
   <div class="mt-6">
@@ -15,7 +15,7 @@
     </p>
   </div>
 
-  <%= form_with model: @category, url: knowledge_base_categories_path,
+  <%= form_with model: @category, url: agent_knowledge_base_categories_path,
     class: "mt-8 space-y-6" do |form| %>
 
     <% if @category.errors.any? %>
@@ -44,7 +44,7 @@
 
     <div class="flex items-center justify-end gap-3">
       <%= link_to "Cancel",
-        knowledge_base_root_path,
+        agent_knowledge_base_root_path,
         class: "text-sm text-gray-600 hover:text-gray-900" %>
 
       <%= form.submit "Create category",

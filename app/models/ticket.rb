@@ -14,14 +14,14 @@ class Ticket < ApplicationRecord
 
   scope :with_status, ->(status) { where(status: status) if status.present? }
   scope :with_priority, ->(priority) { where(priority: priority) if priority.present? }
-  scope :assigned_to, ->(assigned_id) {
-    case assigned_id
+  scope :assigned_to, ->(assignee_id) {
+    case assignee_id
     when "unassigned"
-      where(assinged_id: nil)
+      where(assignee_id: nil)
     when nil, ""
       all
     else
-      where(assigned_id: assigned_id)
+      where(assignee_id: assignee_id)
     end
    }
 

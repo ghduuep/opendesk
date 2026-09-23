@@ -37,6 +37,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    root "dashboard#index"
+
+    resources :users, only: %i[index new create edit update destroy]
+  end
+
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

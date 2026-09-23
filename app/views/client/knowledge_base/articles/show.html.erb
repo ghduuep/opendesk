@@ -1,0 +1,23 @@
+<% content_for :title, "#{@article.title} · OpenDesk" %>
+
+<div class="mx-auto max-w-3xl px-6 py-10">
+  <%= link_to "← #{@article.category.name}",
+    client_knowledge_base_category_path(@article.category),
+    class: "text-sm text-gray-500 hover:text-gray-900" %>
+
+  <article class="mt-8">
+    <header class="border-b border-gray-200 pb-6">
+      <h1 class="text-3xl font-semibold tracking-tight text-gray-900">
+        <%= @article.title %>
+      </h1>
+
+      <p class="mt-2 text-sm text-gray-500">
+        <%= @article.category.name %>
+      </p>
+    </header>
+
+    <div class="prose mt-8 max-w-none">
+      <%= @article.body %>
+    </div>
+  </article>
+</div>

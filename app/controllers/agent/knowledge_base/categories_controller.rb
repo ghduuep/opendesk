@@ -16,7 +16,7 @@ class Agent::KnowledgeBase::CategoriesController < Agent::BaseController
     @category = Current.account.knowledge_base_categories.new(category_params)
 
     if @category.save
-      redirect_to knowledge_base_root_path, notice: "Category created successfully"
+      redirect_to agent_knowledge_base_root_path, notice: "Category created successfully"
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class Agent::KnowledgeBase::CategoriesController < Agent::BaseController
   def destroy
     @category.destroy!
 
-    redirect_to knowledge_base_root_path, notice: "Category deleted successfully"
+    redirect_to agent_knowledge_base_root_path, notice: "Category deleted successfully"
   end
 
   private

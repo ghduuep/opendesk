@@ -2,6 +2,10 @@ class Agent::KnowledgeBase::ArticlesController < Agent::BaseController
   before_action :set_category, only: %i[new create]
   before_action :set_article, only: %i[show edit update]
 
+  def index
+    KnowledgeBase::Article.joins(:category).where(knowledge_base_categories: { account_id: Current.account }).search(params[:q]).includes(:category).order(:title)
+  end
+
   def show
   end
 

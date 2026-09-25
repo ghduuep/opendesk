@@ -2,7 +2,7 @@ class Client::TicketsController < Client::BaseController
   before_action :set_ticket, only: :show
 
   def index
-    @tickets = Current.user.contact&.tickets&.recent || Ticket.none
+    @tickets = Current.user.contact&.tickets&.search(params[:q]).recent || Ticket.none
   end
 
   def show

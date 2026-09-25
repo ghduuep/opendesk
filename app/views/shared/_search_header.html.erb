@@ -1,0 +1,13 @@
+<header class="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white">
+  <div class="mx-auto flex max-w-7xl items-center px-6 py-3">
+    <%= form_with url: search_path,
+      method: :get,
+      class: "w-full max-w-xl" do |form| %>
+
+      <%= form.search_field :q,
+        value: params[:q],
+        placeholder: "Search...",
+        class: "w-full rounded-lg border border-gray-300 px-4 py-2" %>
+    <% end %>
+  </div>
+</header>

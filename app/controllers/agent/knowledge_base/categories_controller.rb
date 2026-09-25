@@ -1,7 +1,7 @@
 class Agent::KnowledgeBase::CategoriesController < Agent::BaseController
   before_action :set_category, only: %i[show destroy]
   def index
-    @categories = Current.account.knowledge_base_categories.order(:position, :name)
+    @categories = Current.account.knowledge_base_categories.search(params[:q]).order(:position, :name)
   end
 
   def show

@@ -19,6 +19,10 @@
                 <div>Tickets</div>
             </div>
 
+            <%= form_with url: agent_contacts_path, method: :get, class: "mb-6" do |form| %>
+              <%= form.search_field :q, value: params[:q], placeholder: "Search contacts...", class: "w-full rounded-lg border border-gray-300 px-4 py-2" %>
+            <% end %>
+
             <div class="divide-y divide-gray-100">
                 <% @contacts.each do |contact| %>
                     <%= link_to agent_contact_path(contact),

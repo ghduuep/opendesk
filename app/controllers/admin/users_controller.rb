@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[edit update destroy]
 
   def index
-    @users = Current.account.users.where(role: %i[agent admin]).order(:email_address)
+    @users = Current.account.users.where(role: %i[agent admin]).search(params[:q]).order(:email_address)
   end
 
   def new

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "search", to: "searches#show", as: :search
   get "home/index"
   namespace :agent do
     root "dashboard#index"
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
         resources :articles, only: %i[new create]
       end
 
-      resources :articles, only: %i[show edit update], param: :slug
+      resources :articles, only: %i[index show edit update], param: :slug
     end
   end
 
@@ -30,10 +31,8 @@ Rails.application.routes.draw do
     namespace :knowledge_base, path: "knowledge-base" do
       root "categories#index"
 
-      get "search", to: "articles#search"
-
       resources :categories, only: %i[index show], param: :slug
-      resources :articles, only: :show, param: :slug
+      resources :articles, only: %i[index show], param: :slug
     end
   end
 

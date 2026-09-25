@@ -1,4 +1,8 @@
 class Contact < ApplicationRecord
+  include Searchable
+
+  searchable_by :name, :email
+
   belongs_to :account
   belongs_to :user
 

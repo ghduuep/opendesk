@@ -1,4 +1,7 @@
 class KnowledgeBase::Category < ApplicationRecord
+  include Searchable
+
+  searchable_by :name
   belongs_to :account
 
   has_many :articles, class_name: "KnowledgeBase::Article", foreign_key: :category_id, dependent: :destroy, inverse_of: :category

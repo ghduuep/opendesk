@@ -2,7 +2,7 @@ class Agent::ContactsController < Agent::BaseController
   before_action :set_contact, only: %i[show destroy]
 
   def index
-    @contacts = Current.account.contacts.includes(:tickets).order(:name, :email)
+    @contacts = Current.account.contacts.includes(:tickets).search(params[:q]).order(:name, :email)
   end
 
   def show

@@ -1,13 +1,11 @@
 class Client::KnowledgeBase::ArticlesController < Client::BaseController
   before_action :set_article, only: :show
 
-  def show
+  def index
+    customer_articles.search(params[:q])
   end
 
-  def search
-    @query = params[:q].to_s.strip
-
-    @articles = customer_articles.search(@query).order(:title)
+  def show
   end
 
   private

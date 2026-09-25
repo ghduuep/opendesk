@@ -24,9 +24,10 @@
   </head>
 
   <body class="h-full bg-gray-50 text-gray-900">
+      <%= render "shared/search_header" %>
     <div class="flex min-h-full">
       <%= render "client/shared/sidebar" %>
-      <main class="min-w-0 flex-1">
+      <main class="min-w-0 flex-1 pt-20">
         <%= render "shared/flash" %>
         <%= yield %>
       </main>

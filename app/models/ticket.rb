@@ -28,7 +28,10 @@ class Ticket < ApplicationRecord
    scope :search, ->(query) {
     return all if query.blank?
 
-    term = "%#{sanitize_sql_like(query.strip)}%"
+    term = query.to_s.strip
+    return all if term.blank?
+
+    term = "%#{sanitize_sql_like(term)}%"
 
     left_joins(:requester)
       .where(

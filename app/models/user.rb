@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  include Searchable
+
+  searchable_by :email_address
+
   belongs_to :account, optional: true
 
   has_secure_password
@@ -24,7 +28,53 @@ class User < ApplicationRecord
     customer?
   end
 
+  def accessible_tickets
+    if customer?
+      contact&.tickets || Ticket.none
+    else
+      account&.tickets || Ticket.none
+    end
+  end
+
+  def accessible_contacts
+    if customer?
+      Contact.none
+    else
+      account&.contacts || Contact.none
+    end
+  end
+
+  def accessible_articles
+    articles = account&.knowledge_base_articles || KnowledgeBase::Article.none
+
+    customer? ? articles.published : articles
+  end
+
+  def accessible_users
+    admin? ? (account&.users || User.none ) : User.none
+  end
+
+  def search(query)
+    return empty_search_results if query.blank?
+
+    {
+      tickets: accessible_tickets.search(query),
+      contacts: accessible_contacts.search(query),
+      articles: accessible_articles.search(query).includes(:category),
+      users: accessible_users.search(query)
+    }
+  end
+
   private
+
+  def empty_search_results
+    {
+      tickets: Ticket.none,
+      contacts: Contact.none,
+      articles: KnowledgeBase::Article.none,
+      users: User.none
+    }
+  end
 
   def create_customer_contact
     create_contact!(

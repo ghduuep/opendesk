@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 # Temporary Rails 8.1 compatibility pin.
 # Remove after Rails is compatible with json 3.x.
-gem "json", "~> 2.21.2"
+gem "json", "~> 3.0.2"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use postgresql as the database for Active Record

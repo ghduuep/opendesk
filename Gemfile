@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.3", ">= 8.1.3.1"
+gem "rails", "~> 8.1.4"
 # Temporary Rails 8.1 compatibility pin.
 # Remove after Rails is compatible with json 3.x.
 gem "json", "~> 2.21.2"

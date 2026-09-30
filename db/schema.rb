@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_23_140227) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_30_182240) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
+    t.string "subdomain", null: false
     t.datetime "updated_at", null: false
+    t.index ["subdomain"], name: "index_accounts_on_subdomain", unique: true
   end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
@@ -136,8 +138,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_23_140227) do
     t.string "password_digest", null: false
     t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id", "email_address"], name: "index_users_on_account_id_and_email_address", unique: true
     t.index ["account_id"], name: "index_users_on_account_id"
-    t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

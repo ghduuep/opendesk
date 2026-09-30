@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :account, optional: true
+  belongs_to :account
 
   has_secure_password
   has_many :sessions, dependent: :destroy
@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_one :contact, dependent: :nullify
 
   enum :role, { customer: 0, agent: 1, admin: 2 }
+
+  validates :email_address, presence: true, uniqueness: {scope: :account_id }
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 

@@ -39,7 +39,7 @@ class Client::TicketsController < Client::BaseController
   end
 
   def customer_tickets
-    Current.user.contact&.tickets || Ticket.none
+    Current.account.tickets.where(requester: Current.user.contact)
   end
 
   def set_ticket

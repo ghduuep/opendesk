@@ -1,7 +1,112 @@
-<% flash.each do |type, message| %>
-    <div class="border-b border-gray-200 bg-white px-8 py-3">
-        <p class="text-sm text-gray-700">
+<div class="pointer-events-none fixed left-1/2 top-5 z-50 flex w-full max-w-sm -translate-x-1/2 flex-col gap-3">
+  <% flash.each do |type, message| %>
+    <% next if message.blank? %>
+
+    <% styles =
+      case type.to_sym
+      when :notice
+        {
+          container: "bg-white border-green-200",
+          icon: "text-green-500",
+          title: "Success"
+        }
+      when :alert
+        {
+          container: "bg-white border-red-200",
+          icon: "text-red-500",
+          title: "Error"
+        }
+      else
+        {
+          container: "bg-white border-gray-200",
+          icon: "text-gray-500",
+          title: "Notification"
+        }
+      end
+    %>
+
+    <div
+      data-controller="flash"
+      data-flash-duration-value="4000"
+      class="
+        pointer-events-auto
+        -translate-y-24
+        opacity-0
+        rounded-xl
+        border
+        shadow-lg
+        transition-all
+        duration-300
+        ease-out
+        <%= styles[:container] %>
+      "
+    >
+      <div class="flex items-start gap-3 p-4">
+
+        <div class="mt-0.5 shrink-0 <%= styles[:icon] %>">
+          <% if type.to_sym == :notice %>
+            <svg
+              class="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          <% elsif type.to_sym == :alert %>
+            <svg
+              class="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
+            </svg>
+          <% end %>
+        </div>
+
+        <div class="min-w-0 flex-1">
+          <p class="text-sm font-semibold text-gray-900">
+            <%= styles[:title] %>
+          </p>
+
+          <p class="mt-1 text-sm text-gray-600">
             <%= message %>
-        </p>
+          </p>
+        </div>
+
+        <button
+          type="button"
+          data-action="flash#close"
+          class="
+            shrink-0
+            rounded-md
+            p-1
+            text-gray-400
+            transition
+            hover:bg-gray-100
+            hover:text-gray-600
+          "
+        >
+          <span class="sr-only">Close</span>
+
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+
+      </div>
     </div>
-<% end %>
+  <% end %>
+</div>
